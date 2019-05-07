@@ -21,5 +21,42 @@
     "electron-context-menu": "^0.12.1",
     "electron-log": "^3.0.5",
     "element-ready": "^3.1.0"
+  },
+  "build": {
+    "appId": "com.oitsjustjose.overleafdesktop",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "assets/icons/macOS/overleaf.icns"
+    },
+    "win": {
+      "icon": "assets/icons/win/overleaf.ico"
+    },
+    "linux": {
+      "icon": "assets/icons/png/overleaf.png"
+    },
+    "deb": {
+      "icon": "assets/icons/png/overleaf.png"
+    },
+    "snap": {
+      "icon": "assets/icons/png/overleaf.png"
+    },
+    "appImage": {
+      "icon": "assets/icons/png/overleaf.png"
+    },
+    "pacman": {
+      "icon": "assets/icons/png/overleaf.png"
+    },
+    "rpm": {
+      "icon": "assets/icons/png/overleaf.png"
+    },
+    "freebsd": {
+      "icon": "assets/icons/png/overleaf.png"
+    },
+    "p5p": {
+      "icon": "assets/icons/png/overleaf.png"
+    },
+    "apk": {
+      "icon": "assets/icons/png/overleaf.png"
+    }
   }
 }
