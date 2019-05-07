@@ -1,5 +1,5 @@
 {
-  "name": "Overleaf Desktop",
+  "name": "Overleaf-Desktop",
   "version": "1.0.0",
   "description": "An Overleaf Electron wrapper",
   "main": "main.js",
