@@ -259,11 +259,12 @@ function createWindow() {
 function addCustomCSS(windowElement) {
   platform = process.platform == "darwin" ? "macos" : "";
   windowElement.webContents.insertCSS(
-    fs.readFileSync(path.join(__dirname, 'css', 'style.css'), 'utf8')
+    fs.readFileSync(path.join(__dirname, 'assets', 'css', 'style.css'), 'utf8')
   );
 
   const platformCSSFile = path.join(
     __dirname,
+    'assets',
     'css',
     `style.${platform}.css`
   );
