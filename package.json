@@ -24,6 +24,9 @@
   },
   "build": {
     "appId": "com.oitsjustjose.overleafdesktop",
+    "appImage": {
+      "category": "public.app-category.productivity"
+    },
     "mac": {
       "category": "public.app-category.productivity",
       "icon": "assets/icons/macOS/overleaf.icns"
@@ -38,10 +41,6 @@
       "icon": "assets/icons/png/overleaf.png"
     },
     "snap": {
-      "icon": "assets/icons/png/overleaf.png"
-    },
-    "appImage": {
-      "icon": "assets/icons/png/overleaf.png"
     },
     "pacman": {
       "icon": "assets/icons/png/overleaf.png"
