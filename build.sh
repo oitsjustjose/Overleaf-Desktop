@@ -1,4 +1,4 @@
-echo "Buildling for Windows"
+echo "Building for Windows"
 
 electron-builder . --win
 
