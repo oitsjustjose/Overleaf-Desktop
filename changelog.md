@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.2
+
+- New Icon
+- Clarify disassociation with official Overleaf name
+
+## 1.0.1
+
 - Added right-click menu
 - Added mailto protocol; opening an email will open it with the app (the 'from' address will be from the last-focused window)
 - Changed aesthetic to be more pleasing (hid elements, made top-bar smaller)
