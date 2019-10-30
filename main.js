@@ -33,22 +33,6 @@ function createWindow() {
     addCustomCSS(mainWindow);
   });
 
-  app.on('window-all-closed', () => {
-    mainWindow.webContents.session.flushStorageData();
-    mainWindow = null;
-    if (process.platform !== "darwin") {
-      app.quit();
-    }
-  });
-
-  app.on('before-quit', (event) => {
-    mainWindow.webContents.session.flushStorageData();
-  });
-
-  mainWindow.on('closed', (event) => {
-    mainWindow.webContents.session.flushStorageData();
-  });
-
   mainWindow.webContents.on('new-window', function (e, url) {
     e.preventDefault();
     if (url.indexOf("v2.overleaf.com") != -1) {
@@ -94,6 +78,10 @@ function init() {
     if (process.platform !== "darwin") {
       app.quit();
     }
+  });
+
+  app.on('before-quit', (event) => {
+    mainWindow.webContents.session.flushStorageData();
   });
 
   app.on('activate', function () {
