@@ -124,11 +124,9 @@ function init() {
     createWindow();
 
     // Dynamically pick a menu-type
-    if (process.platform == "darwin") {
-      macOSMenu();
-    } else {
-      otherMenu();
-    }
+    let template = getTemplate(process.platform);
+    let menu = Menu.buildFromTemplate(template);
+    Menu.setApplicationMenu(menu);
   });
 }
 
