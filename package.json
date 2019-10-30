@@ -24,6 +24,7 @@
   },
   "build": {
     "appId": "com.oitsjustjose.overleafdesktop",
+    "productName": "Overleaf Desktop",
     "appImage": {
       "category": "public.app-category.productivity"
     },
