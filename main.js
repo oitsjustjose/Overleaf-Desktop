@@ -6,211 +6,9 @@ const Menu = electron.Menu;
 const BrowserWindow = electron.BrowserWindow;
 const fs = require('fs');
 const contextMenu = require('electron-context-menu');
+const getTemplate = require('./menu');
 
 let mainWindow;
-
-function otherMenu() {
-  var template = [{
-      label: 'Edit',
-      submenu: [{
-          label: 'Undo',
-          accelerator: 'CmdOrCtrl+Z',
-          selector: 'undo:'
-        },
-        {
-          label: 'Redo',
-          accelerator: 'Shift+CmdOrCtrl+Z',
-          selector: 'redo:'
-        },
-        {
-          type: 'separator'
-        },
-        {
-          label: 'Cut',
-          accelerator: 'CmdOrCtrl+X',
-          selector: 'cut:'
-        },
-        {
-          label: 'Copy',
-          accelerator: 'CmdOrCtrl+C',
-          selector: 'copy:'
-        },
-        {
-          label: 'Paste',
-          accelerator: 'CmdOrCtrl+V',
-          selector: 'paste:'
-        },
-        {
-          label: 'Select All',
-          accelerator: 'CmdOrCtrl+A',
-          selector: 'selectAll:'
-        }
-      ]
-    },
-    {
-      label: 'View',
-      submenu: [{
-          role: 'toggledevtools'
-        },
-        {
-          type: 'separator'
-        },
-        {
-          role: 'resetzoom'
-        },
-        {
-          role: 'zoomin'
-        },
-        {
-          role: 'zoomout'
-        },
-        {
-          type: 'separator'
-        },
-        {
-          role: 'togglefullscreen'
-        }
-      ]
-    },
-    {
-      label: 'Go',
-      submenu: [{
-        role: 'reload'
-      }, {
-        role: 'forcereload'
-      }]
-    }
-  ];
-
-  var menu = Menu.buildFromTemplate(template);
-
-  Menu.setApplicationMenu(menu);
-}
-
-function macOSMenu() {
-  var template = [{
-      label: 'Overleaf Desktop',
-      submenu: [{
-          label: 'About Overleaf Desktop',
-          role: 'about'
-        },
-        {
-          type: 'separator'
-        },
-        {
-          role: 'hide'
-        },
-        {
-          role: 'hideothers'
-        },
-        {
-          role: 'unhide'
-        },
-        {
-          type: 'separator'
-        },
-        {
-          role: 'quit'
-        }
-      ]
-    },
-    {
-      label: 'Edit',
-      submenu: [{
-          label: 'Undo',
-          accelerator: 'CmdOrCtrl+Z',
-          selector: 'undo:'
-        },
-        {
-          label: 'Redo',
-          accelerator: 'Shift+CmdOrCtrl+Z',
-          selector: 'redo:'
-        },
-        {
-          type: 'separator'
-        },
-        {
-          label: 'Cut',
-          accelerator: 'CmdOrCtrl+X',
-          selector: 'cut:'
-        },
-        {
-          label: 'Copy',
-          accelerator: 'CmdOrCtrl+C',
-          selector: 'copy:'
-        },
-        {
-          label: 'Paste',
-          accelerator: 'CmdOrCtrl+V',
-          selector: 'paste:'
-        },
-        {
-          label: 'Select All',
-          accelerator: 'CmdOrCtrl+A',
-          selector: 'selectAll:'
-        }
-      ]
-    },
-    {
-      label: 'View',
-      submenu: [{
-          role: 'toggledevtools'
-        },
-        {
-          type: 'separator'
-        },
-        {
-          role: 'resetzoom'
-        },
-        {
-          role: 'zoomin'
-        },
-        {
-          role: 'zoomout'
-        },
-        {
-          type: 'separator'
-        },
-        {
-          role: 'togglefullscreen'
-        }
-      ]
-    },
-    {
-      label: 'Go',
-      submenu: [{
-        role: 'reload'
-      }, {
-        role: 'forcereload'
-      }]
-    },
-    {
-      label: 'Window',
-      submenu: [{
-          label: 'Minimize',
-          accelerator: 'CmdOrCtrl+M',
-          selector: 'performMiniaturize:'
-        },
-        {
-          label: 'Close',
-          accelerator: 'CmdOrCtrl+W',
-          selector: 'performClose:'
-        },
-        {
-          type: 'separator'
-        },
-        {
-          label: 'Bring All to Front',
-          selector: 'arrangeInFront:'
-        }
-      ]
-    }
-  ];
-
-  var menu = Menu.buildFromTemplate(template);
-
-  Menu.setApplicationMenu(menu);
-}
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -235,8 +33,20 @@ function createWindow() {
     addCustomCSS(mainWindow);
   });
 
-  mainWindow.on('closed', function (event) {
-    event.preventDefault();
+  app.on('window-all-closed', () => {
+    mainWindow.webContents.session.flushStorageData();
+    mainWindow = null;
+    if (process.platform !== "darwin") {
+      app.quit();
+    }
+  });
+
+  app.on('before-quit', (event) => {
+    mainWindow.webContents.session.flushStorageData();
+  });
+
+  mainWindow.on('closed', (event) => {
+    mainWindow.webContents.session.flushStorageData();
   });
 
   mainWindow.webContents.on('new-window', function (e, url) {
@@ -290,11 +100,9 @@ function init() {
     if (mainWindow === null) {
       createWindow();
       // Dynamically pick a menu-type
-      if (process.platform == "darwin") {
-        macOSMenu();
-      } else {
-        otherMenu();
-      }
+      let template = getTemplate(process.platform);
+      let menu = Menu.buildFromTemplate(template);
+      Menu.setApplicationMenu(menu);
     }
   });
 
