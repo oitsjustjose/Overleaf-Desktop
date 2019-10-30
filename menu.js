@@ -1,5 +1,5 @@
 const getTemplate = (platform) => {
-    if (platform == "darwin") {
+    if (platform != "darwin") {
         return [{
             label: 'Edit',
             submenu: [{
