@@ -2,9 +2,9 @@ echo "Cleaning"
 
 rm -rf ./dist
 
-echo "Building for Windows"
+#echo "Building for Windows"
 
-electron-builder . --win
+#electron-builder . --win
 
 echo "Building for macOS"
 
