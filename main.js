@@ -14,7 +14,7 @@ const updateWindowCoords = require("./window.js").updateWindowCoords;
 const updateWindowDims = require("./window.js").updateWindowDims;
 const getWindowData = require("./window.js").getWindowData;
 
-let mainWindow;
+let mainWindow = null;
 let pdfWindow = null;
 
 const showViewerWindow = (url) => {
@@ -165,6 +165,7 @@ const init = () => {
         if (process.platform == "darwin") {
             app.dock.bounce("critical");
         }
+        
         createEditorWindow();
 
         // Dynamically pick a menu-type
