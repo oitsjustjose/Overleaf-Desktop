@@ -1,13 +1,13 @@
 .navbar.navbar-default.navbar-main {
-  -webkit-app-region: drag;
-  user-select: none;
+    -webkit-app-region: drag;
+    user-select: none;
 }
 
 .toolbar.toolbar-header.toolbar-with-labels {
-  -webkit-app-region: drag;
-  user-select: none;
+    -webkit-app-region: drag;
+    user-select: none;
 }
 
 .toolbar-left {
-  padding-left: 64px;
+    padding-left: 64px;
 }
