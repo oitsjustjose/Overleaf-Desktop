@@ -41,7 +41,9 @@
         "deb": {
             "icon": "assets/icons/png/overleaf.png"
         },
-        "snap": {},
+        "snap": {
+            "artifactName": "overleaf-${version}.${ext}"
+        },
         "pacman": {
             "icon": "assets/icons/png/overleaf.png"
         },
