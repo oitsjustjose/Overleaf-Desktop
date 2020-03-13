@@ -14,5 +14,5 @@ jobs:
       - name: Electron Builder Action
         uses: samuelmeuli/action-electron-builder@v1.3.0
         with:
-          github_token: 140251527bb77090c7bfd0f7912fc153ad5e994e
+          github_token: ${{ secrets.github_token }}
           release: true
