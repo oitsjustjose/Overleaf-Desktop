@@ -13,7 +13,7 @@
     "author": "oitsjustjose",
     "license": "CC0-1.0",
     "devDependencies": {
-        "electron-builder": "^20.44.4"
+        "electron-builder": "^22.4.1"
     },
     "dependencies": {
         "electron-context-menu": "^0.12.1",
