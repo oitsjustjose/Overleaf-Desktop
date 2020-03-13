@@ -16,7 +16,7 @@ electron-builder . --linux
 
 electron-builder . --linux snap
 
-snapcraft push --release=stable dist/Overleaf_*.snap
+snapcraft push --release=stable dist/overleaf-*.snap
 
 echo "Done!"
 
