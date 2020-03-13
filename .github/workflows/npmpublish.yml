@@ -1,0 +1,18 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+
+name: Electron Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Electron Builder Action
+        uses: samuelmeuli/action-electron-builder@v1.3.0
+        with:
+          github_token: 140251527bb77090c7bfd0f7912fc153ad5e994e
+          release: true
