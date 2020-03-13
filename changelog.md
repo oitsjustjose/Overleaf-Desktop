@@ -13,3 +13,5 @@ There is no "Download" button for the PDF anymore - click on the "open" icon in 
 The leaf looks less...... amateur. I always liked the original Overleaf logo, but this vectorized leaf will have to do.
 
 ### More Stability / Less Crashes
+
+### Automated building using GitHub Actions
