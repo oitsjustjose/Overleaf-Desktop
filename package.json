@@ -4,8 +4,7 @@
     "description": "A dedicated, **unofficial** desktop application for Overleaf, the online LaTeX editor. Written in electron and built in electron-builder.",
     "main": "main.js",
     "scripts": {
-        "start": "electron .",
-        "build": "sh build.sh"
+        "start": "electron ."
     },
     "keywords": [
         "Overleaf",
