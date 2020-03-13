@@ -14,6 +14,14 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v1
 
+      - name: Install Snapcraft
+        uses: samuelmeuli/action-snapcraft@v1
+        # Only install Snapcraft on Ubuntu
+        if: startsWith(matrix.os, 'ubuntu')
+        with:
+          # Log in to Snap Store
+          snapcraft_token: ${{ secrets.snapcraft_token }}
+
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
