@@ -46,10 +46,10 @@ const initEvts = () => {
         const filepath = path.join(downloadDir, '/tmp.pdf')
 
         if (fs.existsSync(downloadDir)) {
-            fs.rmdirSync(downloadDir)
             if (fs.existsSync(filepath)) {
                 fs.unlinkSync(filepath)
             }
+            fs.rmdirSync(downloadDir)
         }
     })
 }
