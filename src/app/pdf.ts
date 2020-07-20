@@ -14,7 +14,12 @@ export default async (url: string, mw: BrowserWindow, pdfView: BrowserWindow | n
             webPreferences: {
                 plugins: true,
             },
-            title: "Overleaf PDF Preview"
+            title: 'Overleaf PDF Preview'
+        })
+
+        pdfView.on('page-title-updated', (evt) => {
+            evt.preventDefault()
+            pdfView!.title = 'Overleaf PDF Preview'
         })
     }
 
@@ -36,6 +41,7 @@ export default async (url: string, mw: BrowserWindow, pdfView: BrowserWindow | n
     })
 
     await pdfView.loadURL(`file://${filepath}`)
+
 
     return pdfView
 }
