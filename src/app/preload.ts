@@ -5,6 +5,9 @@ const bootstrapPDFButton = (ideToolbar: HTMLElement) => {
         el?.click()
     })
     openBtn.style.cursor = 'pointer'
+    openBtn.setAttribute('tooltip', 'View PDF In Separate Window')
+    openBtn.setAttribute('tooltip-placement', 'bottom')
+    openBtn.setAttribute('tooltip-append-to-body', 'true')
 
     const openBtnIcn = document.createElement('i')
     openBtnIcn.className = 'fa fa-fw fa-external-link'
@@ -19,22 +22,24 @@ let loop = setInterval(() => {
         const fullScrnBtn = ideToolbar.querySelector('.fa.fa-expand')?.parentElement
         const splitScrnBtn = ideToolbar.querySelector('.fa.fa-compress')?.parentElement
         const pdfToolbar = document.querySelector('.toolbar.toolbar-pdf')
-        const recompToggle = ideToolbar.querySelector('.btn.btn-recompile.dropdown-toggle') as HTMLElement
-        const recompGroup = ideToolbar.querySelector('.btn-group.btn-recompile-group') as HTMLElement
 
         bootstrapPDFButton(ideToolbar)
 
         const eastPane = document.querySelector('.ui-layout-east.ui-layout-pane.ui-layout-pane-east') as HTMLElement
         if (eastPane && eastPane.style.display == 'none') {
-            ideToolbar.appendChild(document.getElementById('recompile')!)
-            recompToggle.style.display = 'none'
-            recompGroup.style.marginRight = '0px'
+            const recomp = document.getElementById('recompile')
+            if (recomp) {
+                ideToolbar.appendChild(recomp)
+                recomp.style.marginRight = '0px'
+            }
         }
 
         fullScrnBtn?.addEventListener('click', () => {
-            ideToolbar.appendChild(document.getElementById('recompile')!)
-            recompToggle.style.display = 'none'
-            recompGroup.style.marginRight = '0px'
+            const recomp = document.getElementById('recompile')
+            if (recomp) {
+                ideToolbar.appendChild(recomp)
+                recomp.style.marginRight = '0px'
+            }
         })
 
         splitScrnBtn?.addEventListener('click', () => {
