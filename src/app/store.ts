@@ -3,6 +3,7 @@ import path from 'path'
 import fs from 'fs'
 
 interface StorageOptionsDefaults {
+    autohideMenu: boolean,
     width: number,
     height: number,
     x: number,
@@ -16,7 +17,7 @@ interface StorageOptions {
 
 export default class Store {
     path: string
-    data: StorageOptionsDefaults
+    data: any
 
     constructor(opts: StorageOptions) {
         const dataPath = (electron.app || electron.remote.app).getPath('userData')
@@ -24,11 +25,11 @@ export default class Store {
         this.data = parseDataFile(this.path, opts.defaults)
     }
 
-    get(key: 'x' | 'y' | 'width' | 'height') {
+    get(key: string) {
         return this.data[key]
     }
 
-    set(key: 'x' | 'y' | 'width' | 'height', val: any) {
+    set(key: string, val: any) {
         this.data[key] = val
         fs.writeFileSync(this.path, JSON.stringify(this.data))
     }
@@ -40,6 +41,7 @@ export default class Store {
 
 const isValidConfig = (input: any): input is StorageOptionsDefaults => {
     const schema: Record<keyof StorageOptionsDefaults, string> = {
+        autohideMenu: 'boolean',
         width: 'number',
         height: 'number',
         x: 'number',

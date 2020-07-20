@@ -1,9 +1,10 @@
-import { MenuItemConstructorOptions } from 'electron'
+import { BrowserWindow, KeyboardEvent, MenuItem, MenuItemConstructorOptions } from 'electron'
 import Store from '../app/store'
 
 const store = new Store({
     configName: 'user-preferences',
     defaults: {
+        autohideMenu: false,
         width: 800,
         height: 600,
         x: 0,
@@ -58,6 +59,17 @@ const menu = () => {
             role: 'zoomOut'
         }, {
             type: 'separator'
+        }, {
+            type: 'checkbox',
+            label: 'Auto Hide Menubar',
+            click: (menuItem: MenuItem, bw: BrowserWindow | undefined, evt: KeyboardEvent) => {
+                const newHide = !store.get('autohideMenu')
+                menuItem.checked = newHide
+                if (newHide) {
+                    bw?.setAutoHideMenuBar(true)
+                }
+                store.set('autohideMenu', newHide)
+            }
         }, {
             role: 'togglefullscreen'
         }]
