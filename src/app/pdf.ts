@@ -1,26 +1,35 @@
-import { screen, BrowserWindow } from 'electron'
+import electron, { screen, BrowserWindow } from 'electron'
+import { download } from 'electron-dl'
 import path from 'path'
+import fs from 'fs'
 
-export default (url: string) => {
+export default async (url: string, mw: BrowserWindow) => {
     const scr = screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
-    const pw = new BrowserWindow({
-        icon: path.resolve(`${path.dirname(require.main!.filename)}/../assets/icons/png/overleaf.png`),
+    const bw = new BrowserWindow({
         width: scr.bounds.width / 3,
         height: scr.bounds.height,
         x: 0,
         y: 0,
         webPreferences: {
             plugins: true,
-            nodeIntegration: true
-        }
+        },
+        parent: mw
     })
 
-    pw.loadURL(url)
+    const base = (electron.app || electron.remote.app).getPath('userData')
 
-    pw.once('ready-to-show', () => {
-        pw.show()
-        pw.focus()
+    const filepath = path.join(base, 'tmp.pdf')
+
+    if (fs.existsSync(filepath)) {
+        fs.unlinkSync(filepath)
+    }
+
+    await download(mw, url, {
+        directory: base,
+        filename: 'tmp.pdf',
     })
 
-    return pw
+    await bw.loadURL(`file://${filepath}`)
+
+    return bw
 }

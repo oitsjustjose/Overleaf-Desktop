@@ -22,11 +22,11 @@
   "devDependencies": {
     "electron": "^9.0.5",
     "electron-builder": "^22.7.0",
-    "electron-context-menu": "^2.0.1",
-    "electron-pdf-window": "^1.0.12"
+    "electron-context-menu": "^2.0.1"
   },
   "dependencies": {
     "@types/electron": "^1.6.10",
+    "electron-dl": "^3.0.1",
     "typescript": "^3.9.6"
   },
   "build": {
