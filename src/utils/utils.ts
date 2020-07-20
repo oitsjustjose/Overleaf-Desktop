@@ -62,13 +62,17 @@ const menu = () => {
         }, {
             type: 'checkbox',
             label: 'Auto Hide Menubar',
+            checked: store.get('autohideMenu'),
             click: (menuItem: MenuItem, bw: BrowserWindow | undefined, evt: KeyboardEvent) => {
                 const newHide = !store.get('autohideMenu')
-                menuItem.checked = newHide
                 if (newHide) {
                     bw?.setAutoHideMenuBar(true)
+                } else {
+                    bw?.setAutoHideMenuBar(false)
+                    bw?.setMenuBarVisibility(true);
                 }
                 store.set('autohideMenu', newHide)
+                menuItem.checked = newHide
             }
         }, {
             role: 'togglefullscreen'
