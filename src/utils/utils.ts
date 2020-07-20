@@ -23,6 +23,10 @@ export const setWindow = (x: number, y: number, width: number, height: number) =
     store.set('height', height)
 }
 
+export const shouldMenuAutohide = () => {
+    return store.get('autohideMenu')
+}
+
 const menu = () => {
     const tmpl: Array<MenuItemConstructorOptions> = [{
         label: 'Edit',
@@ -69,7 +73,7 @@ const menu = () => {
                     bw?.setAutoHideMenuBar(true)
                 } else {
                     bw?.setAutoHideMenuBar(false)
-                    bw?.setMenuBarVisibility(true);
+                    bw?.setMenuBarVisibility(true)
                 }
                 store.set('autohideMenu', newHide)
                 menuItem.checked = newHide

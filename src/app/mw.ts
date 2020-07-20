@@ -27,6 +27,11 @@ export default () => {
         }
     })
 
+    if (Utils.shouldMenuAutohide()) {
+        mw.setAutoHideMenuBar(true)
+        mw.setMenuBarVisibility(false)
+    }
+
     mw.loadURL('https://v2.overleaf.com/')
 
     mw.webContents.on('dom-ready', () => {
