@@ -1,47 +1,68 @@
 import electron from 'electron'
-import fs from 'fs'
 import path from 'path'
+import fs from 'fs'
 
-interface IDataSchema {
-    'x': number,
-    'y': number,
-    'width': number,
-    'height': number
+interface StorageOptionsDefaults {
+    width: number,
+    height: number,
+    x: number,
+    y: number
 }
 
-interface IStoreOptions {
+interface StorageOptions {
     configName: string,
-    defaults: IDataSchema
+    defaults: StorageOptionsDefaults
 }
 
 export default class Store {
     path: string
-    data: any
+    data: StorageOptionsDefaults
 
-    constructor(opts: IStoreOptions) {
+    constructor(opts: StorageOptions) {
         const dataPath = (electron.app || electron.remote.app).getPath('userData')
-
         this.path = path.join(dataPath, opts.configName + '.json')
-        this.data = parseFile(this.path, opts.defaults)
+        this.data = parseDataFile(this.path, opts.defaults)
     }
 
-    get(key: string) {
+    get(key: 'x' | 'y' | 'width' | 'height') {
         return this.data[key]
     }
 
-    set(key: string, val: boolean | number) {
-        this.data = val
+    set(key: 'x' | 'y' | 'width' | 'height', val: any) {
+        this.data[key] = val
         fs.writeFileSync(this.path, JSON.stringify(this.data))
     }
 
     all() {
-        return (this.data as IDataSchema)
+        return (this.data as StorageOptionsDefaults)
     }
 }
 
-const parseFile = (fp: string, defaults: IDataSchema) => {
+const isValidConfig = (input: any): input is StorageOptionsDefaults => {
+    const schema: Record<keyof StorageOptionsDefaults, string> = {
+        width: 'number',
+        height: 'number',
+        x: 'number',
+        y: 'number'
+    }
+
+    const missingProperties = Object.keys(schema)
+        .filter(key => input[key] === undefined)
+        .map(key => key as keyof StorageOptionsDefaults)
+        .map(key => console.warn(`Config is missing ${key} ${schema[key]}`))
+
+    // throw the errors if you choose
+    return missingProperties.length === 0
+}
+
+const parseDataFile = (fp: string, defaults: StorageOptionsDefaults) => {
     try {
-        return JSON.parse(fs.readFileSync(fp).toString())
+        const data = JSON.parse(fs.readFileSync(fp).toString())
+
+        if (isValidConfig(data)) {
+            return data
+        }
+        return defaults
     } catch (ex) {
         return defaults
     }

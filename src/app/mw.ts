@@ -3,7 +3,6 @@ import path from 'path'
 import * as Utils from '../utils/utils'
 import * as CSS from './css'
 import MakePDFWindow from './pdf'
-import pdf from './pdf'
 
 let pdfView: BrowserWindow | null = null
 
