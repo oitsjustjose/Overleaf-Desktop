@@ -33,7 +33,7 @@
     "appId": "com.oitsjustjose.overleafdesktop",
     "productName": "Overleaf Desktop",
     "appImage": {
-      "category": "public.app-category.productivity"
+      "category": "Office"
     },
     "mac": {
       "category": "public.app-category.productivity",
@@ -43,26 +43,35 @@
       "icon": "assets/icons/win/overleaf.ico"
     },
     "linux": {
-      "icon": "assets/icons/png/overleaf.png"
+      "icon": "assets/icons/png/overleaf.png",
+      "category": "Office"
     },
     "deb": {
-      "icon": "assets/icons/png/overleaf.png"
+      "icon": "assets/icons/png/overleaf.png",
+      "category": "Office"
     },
-    "snap": {},
+    "snap": {
+      "category": "Office"
+    },
     "pacman": {
-      "icon": "assets/icons/png/overleaf.png"
+      "icon": "assets/icons/png/overleaf.png",
+      "category": "Office"
     },
     "rpm": {
-      "icon": "assets/icons/png/overleaf.png"
+      "icon": "assets/icons/png/overleaf.png",
+      "category": "Office"
     },
     "freebsd": {
-      "icon": "assets/icons/png/overleaf.png"
+      "icon": "assets/icons/png/overleaf.png",
+      "category": "Office"
     },
     "p5p": {
-      "icon": "assets/icons/png/overleaf.png"
+      "icon": "assets/icons/png/overleaf.png",
+      "category": "Office"
     },
     "apk": {
-      "icon": "assets/icons/png/overleaf.png"
+      "icon": "assets/icons/png/overleaf.png",
+      "category": "Office"
     }
   }
 }
