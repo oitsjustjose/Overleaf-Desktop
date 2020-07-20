@@ -33,14 +33,13 @@ export default () => {
         CSS.inject(mw)
     })
 
-
     mw.webContents.on('new-window', async (evt, url, _) => {
         evt.preventDefault()
 
         if (url.includes('overleaf.com')) {
             if (url.includes('pdf')) {
                 url = `${url.substr(0, url.indexOf('output.pdf?'))}output.pdf`
-                pdfView = await MakePDFWindow(url, mw)
+                pdfView = await MakePDFWindow(url, mw, pdfView)
             } else {
                 mw.loadURL(url)
                 CSS.inject(mw)
