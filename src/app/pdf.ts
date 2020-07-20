@@ -13,7 +13,6 @@ export default async (url: string, mw: BrowserWindow) => {
         webPreferences: {
             plugins: true,
         },
-        parent: mw
     })
 
     const base = (electron.app || electron.remote.app).getPath('userData')
