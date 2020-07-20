@@ -2,7 +2,7 @@
   "name": "overleaf_desktop",
   "version": "2.0.0",
   "description": "A dedicated, **unofficial** desktop application for Overleaf, the online LaTeX editor. Written in electron and built in electron-builder.",
-  "main": "main.js",
+  "main": "./js/app.js",
   "scripts": {
     "dev": "tsc && electron ./js/app",
     "build": "tsc",
@@ -48,9 +48,7 @@
     "deb": {
       "icon": "assets/icons/png/overleaf.png"
     },
-    "snap": {
-      "artifactName": "overleaf-${version}.${ext}"
-    },
+    "snap": {},
     "pacman": {
       "icon": "assets/icons/png/overleaf.png"
     },
