@@ -14,6 +14,7 @@ export default async (url: string, mw: BrowserWindow, pdfView: BrowserWindow | n
             webPreferences: {
                 plugins: true,
             },
+            title: "Overleaf PDF Preview"
         })
     }
 
