@@ -1,63 +1,70 @@
 {
-    "name": "overleaf-desktop",
-    "version": "2.0.0",
-    "description": "A dedicated, **unofficial** desktop application for Overleaf, the online LaTeX editor. Written in electron and built in electron-builder.",
-    "main": "main.js",
-    "scripts": {
-        "start": "electron ."
+  "name": "overleaf_desktop",
+  "version": "2.0.0",
+  "description": "A dedicated, **unofficial** desktop application for Overleaf, the online LaTeX editor. Written in electron and built in electron-builder.",
+  "main": "main.js",
+  "scripts": {
+    "dev": "tsc && electron ./js/app",
+    "build": "tsc",
+    "clean": "rm -r node_modules && rm -r js",
+    "dist": "sh ./scripts/build.sh",
+    "dist:mac": "electron-builder --mac",
+    "dist:allother": "$SHELL ./scripts/docker.sh",
+    "dist:snapcraft": "snapcraft push --release=stable ./dist/Overleaf\\ Desktop-*.snap",
+    "dist:all": "npm run dist:allother; npm run dist:mac; npm run dist:snapcraft"
+  },
+  "keywords": [
+    "Overleaf",
+    "LaTex"
+  ],
+  "author": "oitsjustjose",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^9.0.5",
+    "electron-builder": "^22.7.0",
+    "electron-context-menu": "^2.0.1",
+    "electron-pdf-window": "^1.0.12"
+  },
+  "dependencies": {
+    "@types/electron": "^1.6.10",
+    "typescript": "^3.9.6"
+  },
+  "build": {
+    "appId": "com.oitsjustjose.overleafdesktop",
+    "productName": "Overleaf Desktop",
+    "appImage": {
+      "category": "public.app-category.productivity"
     },
-    "keywords": [
-        "Overleaf",
-        "LaTex"
-    ],
-    "author": "oitsjustjose",
-    "license": "CC0-1.0",
-    "devDependencies": {
-        "electron-builder": "^22.4.1"
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "assets/icons/macOS/overleaf.icns"
     },
-    "dependencies": {
-        "electron-context-menu": "^0.12.1",
-        "electron-log": "^3.0.5",
-        "electron-nightly": "^10.0.0-nightly.20200221",
-        "electron-pdf-window": "^1.0.12",
-        "element-ready": "^3.1.0"
+    "win": {
+      "icon": "assets/icons/win/overleaf.ico"
     },
-    "build": {
-        "appId": "com.oitsjustjose.overleafdesktop",
-        "productName": "Overleaf Desktop",
-        "appImage": {
-            "category": "public.app-category.productivity"
-        },
-        "mac": {
-            "category": "public.app-category.productivity",
-            "icon": "assets/icons/macOS/overleaf.icns"
-        },
-        "win": {
-            "icon": "assets/icons/win/overleaf.ico"
-        },
-        "linux": {
-            "icon": "assets/icons/png/overleaf.png"
-        },
-        "deb": {
-            "icon": "assets/icons/png/overleaf.png"
-        },
-        "snap": {
-            "artifactName": "overleaf-${version}.${ext}"
-        },
-        "pacman": {
-            "icon": "assets/icons/png/overleaf.png"
-        },
-        "rpm": {
-            "icon": "assets/icons/png/overleaf.png"
-        },
-        "freebsd": {
-            "icon": "assets/icons/png/overleaf.png"
-        },
-        "p5p": {
-            "icon": "assets/icons/png/overleaf.png"
-        },
-        "apk": {
-            "icon": "assets/icons/png/overleaf.png"
-        }
+    "linux": {
+      "icon": "assets/icons/png/overleaf.png"
+    },
+    "deb": {
+      "icon": "assets/icons/png/overleaf.png"
+    },
+    "snap": {
+      "artifactName": "overleaf-${version}.${ext}"
+    },
+    "pacman": {
+      "icon": "assets/icons/png/overleaf.png"
+    },
+    "rpm": {
+      "icon": "assets/icons/png/overleaf.png"
+    },
+    "freebsd": {
+      "icon": "assets/icons/png/overleaf.png"
+    },
+    "p5p": {
+      "icon": "assets/icons/png/overleaf.png"
+    },
+    "apk": {
+      "icon": "assets/icons/png/overleaf.png"
     }
+  }
 }
