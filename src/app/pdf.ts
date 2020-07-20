@@ -17,15 +17,20 @@ export default async (url: string, mw: BrowserWindow) => {
     })
 
     const base = (electron.app || electron.remote.app).getPath('userData')
+    const downloadDir = path.join(base, '/download/')
 
-    const filepath = path.join(base, 'tmp.pdf')
+    if (!fs.existsSync(downloadDir)) {
+        fs.mkdirSync(downloadDir)
+    }
+
+    const filepath = path.join(base, '/download/tmp.pdf')
 
     if (fs.existsSync(filepath)) {
         fs.unlinkSync(filepath)
     }
 
     await download(mw, url, {
-        directory: base,
+        directory: downloadDir,
         filename: 'tmp.pdf',
     })
 
