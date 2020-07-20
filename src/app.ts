@@ -1,7 +1,9 @@
-import { app, BrowserWindow, Menu } from 'electron'
+import electron, { app, BrowserWindow, Menu } from 'electron'
+import contextMenu from 'electron-context-menu'
+import fs from 'fs'
+import path from 'path'
 import MakeWindow from './app/mw'
 import { getMenu } from './utils/utils'
-import contextMenu from 'electron-context-menu'
 
 let window: BrowserWindow | null = null
 
@@ -37,6 +39,18 @@ const initEvts = () => {
 
         window = MakeWindow()
         Menu.setApplicationMenu(Menu.buildFromTemplate(getMenu()))
+    })
+
+    app.on('quit', () => {
+        const downloadDir = path.join((electron.app || electron.remote.app).getPath('userData'), '/download/')
+        const filepath = path.join(downloadDir, '/tmp.pdf')
+
+        if (fs.existsSync(downloadDir)) {
+            fs.rmdirSync(downloadDir)
+            if (fs.existsSync(filepath)) {
+                fs.unlinkSync(filepath)
+            }
+        }
     })
 }
 
