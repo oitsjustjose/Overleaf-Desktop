@@ -53,6 +53,7 @@ export default () => {
 
     mw.on('close', () => {
         mw.webContents.session.flushStorageData()
+        pdfView?.destroy()
     })
 
     mw.on('move', () => {
