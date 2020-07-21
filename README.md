@@ -10,6 +10,8 @@ This app aims to provide a seamless experience for users, allowing them to close
 
 ## Downloads:
 
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/overleaf)
+
 For Ubuntu / Snap Store users, you can find it by searching for "Overleaf". Other users can find releases [here](https://github.com/oitsjustjose/overleaf-desktop/releases)!
 
 ## Building / Dev:
