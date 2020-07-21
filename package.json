@@ -32,12 +32,15 @@
   "build": {
     "appId": "com.oitsjustjose.overleafdesktop",
     "productName": "Overleaf Desktop",
+    "artifactName": "Overleaf Desktop-${version}.${ext}",
     "appImage": {
       "category": "Office"
     },
     "mac": {
       "category": "public.app-category.productivity",
-      "icon": "assets/icons/macOS/overleaf.icns"
+      "icon": "assets/icons/macOS/overleaf.icns",
+      "darkModeSupport": true,
+      "hardenedRuntime": true
     },
     "win": {
       "icon": "assets/icons/win/overleaf.ico"
