@@ -34,7 +34,6 @@ export default () => {
 
 
     lookup('v2.overleaf.com').then((connected) => {
-        console.log(connected)
         if (!connected) {
             const btnClicked = dialog.showMessageBoxSync(mw, {
                 title: "Detected No Internet Connection",
