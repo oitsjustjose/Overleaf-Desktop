@@ -1,10 +1,9 @@
-import { BrowserWindow, shell, app } from 'electron'
+import { app, BrowserWindow, dialog, shell } from 'electron'
 import path from 'path'
 import * as Utils from '../utils/utils'
+import { lookup } from '../utils/utils'
 import * as CSS from './css'
 import MakePDFWindow from './pdf'
-import { lookup } from '../utils/utils'
-import { dialog } from 'electron'
 let pdfView: BrowserWindow | null = null
 
 export default () => {
