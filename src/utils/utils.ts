@@ -1,5 +1,6 @@
 import { BrowserWindow, KeyboardEvent, MenuItem, MenuItemConstructorOptions } from 'electron'
 import Store from '../app/store'
+import {lookup as dnsLookup} from 'dns'
 
 const store = new Store({
     configName: 'user-preferences',
@@ -169,6 +170,17 @@ const macOsMenu = () => {
     }]
 
     return tmpl
+}
+
+export const lookup = (url: string) => {
+    return new Promise((resolve, reject, ) => {
+        dnsLookup(url, (err, _, __) => {
+            if(err) {
+                resolve(false)
+            }
+            resolve(true)
+        })
+    })
 }
 
 export const getMenu = () => {

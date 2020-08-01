@@ -1,9 +1,11 @@
-import { BrowserWindow, shell } from 'electron'
+import { BrowserWindow, shell, app } from 'electron'
 import path from 'path'
 import * as Utils from '../utils/utils'
 import * as CSS from './css'
+import { } from 'dns'
 import MakePDFWindow from './pdf'
-
+import { lookup } from '../utils/utils'
+import { dialog } from 'electron'
 let pdfView: BrowserWindow | null = null
 
 export default () => {
@@ -32,7 +34,31 @@ export default () => {
         mw.setMenuBarVisibility(false)
     }
 
+
+    lookup('v2.overleaf.com').then((connected) => {
+        console.log(connected)
+        if (!connected) {
+            const btnClicked = dialog.showMessageBoxSync(mw, {
+                title: "Detected No Internet Connection",
+                message: `
+                    Overleaf Desktop requires the internet to run.
+                    Since you are not connected to the internet, this
+                    application is not able to connect to Overleaf (or
+                    its servers). Sorry!
+                `,
+                type: 'error',
+                icon: path.resolve(`${path.dirname(require.main!.filename)}/../assets/icons/png/overleaf.png`),
+                buttons: ["Continue", "Quit"],
+            })
+
+            if (btnClicked === 1) {
+                app.quit()
+            }
+        }
+    })
+
     mw.loadURL('https://v2.overleaf.com/')
+
 
     mw.webContents.on('dom-ready', () => {
         CSS.inject(mw)
